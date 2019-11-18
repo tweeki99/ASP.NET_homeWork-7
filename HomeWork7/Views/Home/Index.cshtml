@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HomeWork7.ViewModels.PostViewModel>
+@{
+    ViewBag.Title = "Home Page";
+    string isAuthenticated = ViewData["IsAuthenticated"] as string;
+    string isAdmin = ViewData["IsAdmin"] as string;
+    var posts = ViewData["Posts"] as IEnumerable<HomeWork7.ViewModels.PostViewModel>;
+}
+
+<div class="jumbotron">
+    @if (isAuthenticated == "NotAuthenticated")
+    {
+        <h2> Зайди в свой акк</h2>
+    }
+    else
+    {
+        <div class="site-wrap">
+            <div class="site-section">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h2>На повестке дня</h2>
+                        </div>
+                    </div>
+                    <div class="row" id="box">
+                        @foreach (var post in Model)
+                        {
+
+                            <div class="col-lg-4 mb-4">
+                                <div class="entry2">
+                                    <a href="#"><img src="@post.ImgPath" alt="Image" class="img-fluid rounded"></a>
+                                    <div class="excerpt">
+                                        <span class="post-category text-white bg-danger mb-3">Technology</span>
+                                        <h2><a href="#">@post.Title</a></h2>
+                                        <div class="post-meta align-items-center text-left clearfix">
+                                            <figure class="author-figure mb-0 mr-3 float-left"><img src="~/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
+                                            <span class="d-inline-block mt-1">By <a href="#">Admi Adminovich</a></span>
+                                            <span>&nbsp;-&nbsp; @post.PublicationDate</span>
+                                        </div>
+
+                                        <p>@post.Text</p>
+                                        <p><a href="#">Читать далее</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
